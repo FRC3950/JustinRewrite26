@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   private final TalonFX intake2 = new TalonFX(42);
 
   public Intake() {
-    intake2.setControl(new Follower(intake.getDeviceID(), false));
+    intake2.setControl(new Follower(intake.getDeviceID(), MotorAlignmentValue.Aligned));
   }
 
   public void startIntake() {

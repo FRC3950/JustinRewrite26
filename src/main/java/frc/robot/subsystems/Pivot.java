@@ -23,7 +23,7 @@ import frc.robot.Constants;
 
 public class Pivot extends SubsystemBase {
   private static final TalonFX pivot = new TalonFX(15, "CANivore");
-  private final DynamicMotionMagicVoltage mm_request = new DynamicMotionMagicVoltage(0, 130, 260, 0);
+  private final DynamicMotionMagicVoltage mm_request = new DynamicMotionMagicVoltage(0.0, 130.0, 260.0);
   private final PositionVoltage pos = new PositionVoltage(0);
 
   public Pivot() {
@@ -73,7 +73,9 @@ public class Pivot extends SubsystemBase {
   }
 
   public Command stowDefault() {
-    return Commands.run(() -> pivot.setControl(pos.withPosition(Constants.pivotStowPosition).withFeedForward(getFeedForward())), this)
+    return Commands
+        .run(() -> pivot.setControl(pos.withPosition(Constants.pivotStowPosition).withFeedForward(getFeedForward())),
+            this)
         .until(pivotZero())
         .andThen(Commands.run(() -> pivot.setControl(new VoltageOut(Constants.pivotStowHoldVolts)), this));
   }
